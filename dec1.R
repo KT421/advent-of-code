@@ -17,7 +17,7 @@ length(differences[differences > 0])
 
 # create a three-measurement sliding window of sums, then find those that increase
 
-window_depths <- depths + lag(depths) + lag(depths, n = 2)
+window_depths <- depths + dplyr::lag(depths) + dplyr::lag(depths, n = 2)
 
 window_depths <- na.omit(window_depths)
 
