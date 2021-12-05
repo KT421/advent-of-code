@@ -1,6 +1,5 @@
 # Advent of Code 2021
 # Dec 4
-# Puzzle #1
 
 library(tidyverse)
 
@@ -48,12 +47,12 @@ for (i in 1:length(bingo_numbers)) {
     
     # check each column and row
     for (k in 1:5) {
-      winner = F
+      winner <- F
       
       if (all(board[,k] %in% drawn_numbers) | all(board[k,] %in% drawn_numbers))
-      { winner = T }
+      { winner <- T }
       
-      if (winner == T & !j %in% winners$board) {
+      if (winner == T) {
         print(paste("Winner winner chicken dinner! Board: ",j))
         win <- c(draw = i, num = as.numeric(bingo_numbers[i]), board = j)
         winners <- bind_rows(winners, win)
