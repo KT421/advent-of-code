@@ -8,11 +8,10 @@ library(tidyverse)
 
 input <- read_lines("input/dec5.txt")
 
-input <- read_lines("input/dec5_test.txt")
-
 endpoints <- t(data.frame(strsplit(input, " -> ")))
 
-#function that takes in endpoints data and returns a dataframe of x,y points
+#### function for finding vent locations from endpoints ####
+
 locate_vents <- function(vents, diagonals) {
   start_coord <- unlist(strsplit(vents[1],","))
   end_coord <- unlist(strsplit(vents[2],","))
@@ -28,7 +27,7 @@ locate_vents <- function(vents, diagonals) {
   }
   
   if (run == T)
-         {
+    {
     x <- c(start_coord[1]:end_coord[1])
     y <- c(start_coord[2]:end_coord[2])
     
@@ -41,7 +40,8 @@ locate_vents <- function(vents, diagonals) {
   vent_locs
 }
 
-#tests
+#### locate_vents() tests ####
+
 vents_straight <- endpoints[1,]
 vents_diag <- endpoints[6,]
 
@@ -50,18 +50,41 @@ locate_vents(vents_straight,F)
 locate_vents(vents_diag,T)
 locate_vents(vents_diag,F)
 
-# find all vent locations
+#### function for finding danger spots ####
 
-vent_locations <- NULL
+count_danger_spots <- function(vent_locations) {
+  vent_locations %>%
+    mutate(coords = paste(x,y)) %>%
+    group_by(coords) %>%
+    summarise(count = n()) %>%
+    filter(count > 1) %>%
+    nrow()
+}
+
+#### solutions ####
+
+# find all vent locations - straight lines
+
+vent_locations_straight <- NULL
 
 for (i in 1:nrow(endpoints)) {
   vents <- locate_vents(endpoints[i,], diagonals = FALSE)
-  vent_locations <- rbind(vents,vent_locations)
+  vent_locations_straight <- rbind(vents,vent_locations_straight)
 }
 
 # find total number of spots with > 1
 
-test <- vent_locations %>%
-  mutate(coords = paste(x,y)) 
+count_danger_spots(vent_locations_straight)
 
-  table(coords)
+# find all vent locations - with diagonal lines
+
+vent_locations_diag <- NULL
+
+for (i in 1:nrow(endpoints)) {
+  vents <- locate_vents(endpoints[i,], diagonals = TRUE)
+  vent_locations_diag <- rbind(vents,vent_locations_diag)
+}
+
+# find total number of spots with > 1
+
+count_danger_spots(vent_locations_diag)
