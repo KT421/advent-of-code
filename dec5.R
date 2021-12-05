@@ -54,8 +54,7 @@ locate_vents(vents_diag,F)
 
 count_danger_spots <- function(vent_locations) {
   vent_locations %>%
-    mutate(coords = paste(x,y)) %>%
-    group_by(coords) %>%
+    group_by(x,y) %>%
     summarise(count = n()) %>%
     filter(count > 1) %>%
     nrow()
@@ -88,3 +87,18 @@ for (i in 1:nrow(endpoints)) {
 # find total number of spots with > 1
 
 count_danger_spots(vent_locations_diag)
+
+
+#### shits and giggles ####
+
+library(viridis)
+library(ggthemes)
+
+vent_locations_diag %>%
+  group_by(x,y) %>%
+  summarise(count = n()) %>%
+ggplot(aes(x,y, color = fct_rev(as.factor(count)))) +
+  geom_point(size = .1, shape = 17) +
+  theme_solarized_2() +
+  scale_color_viridis_d(option = "inferno") +
+  theme(legend.position = "none")
