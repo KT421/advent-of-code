@@ -99,6 +99,9 @@ vent_locations_diag %>%
   summarise(count = n()) %>%
 ggplot(aes(x,y, color = fct_rev(as.factor(count)))) +
   geom_point(size = .1, shape = 17) +
-  theme_solarized_2() +
+  theme_solarized_2(light = FALSE) +
   scale_color_viridis_d(option = "inferno") +
   theme(legend.position = "none")
+
+
+ggsave("vents.png", width = 10, height = 10)
