@@ -31,54 +31,6 @@ for (i in 1:100) {
 
 drawn_numbers <- NULL
 winning_board <- NULL
-winner <- FALSE
-
-for (i in 1:length(bingo_numbers)) {
-  drawn_numbers <- bingo_numbers[1:i]
-  
-  # check each board for winning
-
-  for (j in 1:length(prepped_boards)) {
-    board <- prepped_boards[[j]]
-    
-    # check each column and row
-    for (k in 1:5) {
-      
-    if (all(board[,k] %in% drawn_numbers) | all(board[k,] %in% drawn_numbers))
-        { print(paste("Winner winner chicken dinner! Board#: ",j))
-          winner = T }
-    
-    if (winner == T) {
-      winning_board <- j
-      break
-      }
-
-    }
-
-    if (winner == T) break
-  }
-    if (winner == T) break
-}
-
-# calculate winning score
-
-# last number called * sum(all uncalled values on board)
-
-unmarked_nums <- unlist(prepped_boards[[winning_board]]) 
-unmarked_nums <- unmarked_nums[!unmarked_nums %in% drawn_numbers]
-
-as.numeric(tail(drawn_numbers,1)) * sum(unmarked_nums)
-
-
-# Part 2
-
-# let the squid win
-# find the LAST board to win
-
-# modify the loop to return an index of winner num
-
-drawn_numbers <- NULL
-winning_board <- NULL
 winners <- data.frame(matrix(ncol=3,nrow=0))
 colnames(winners) <- c("draw", "num","board")
 
@@ -88,6 +40,10 @@ for (i in 1:length(bingo_numbers)) {
   # check each board for winning
   
   for (j in 1:length(prepped_boards)) {
+    
+    #skip boards that have already won
+    if (j %in% winners$board) next
+      
     board <- prepped_boards[[j]]
     
     # check each column and row
@@ -97,7 +53,8 @@ for (i in 1:length(bingo_numbers)) {
       if (all(board[,k] %in% drawn_numbers) | all(board[k,] %in% drawn_numbers))
       { winner = T }
       
-      if (winner == T & !j %in% winners[,3]) {
+      if (winner == T & !j %in% winners$board) {
+        print(paste("Winner winner chicken dinner! Board: ",j))
         win <- c(draw = i, num = as.numeric(bingo_numbers[i]), board = j)
         winners <- bind_rows(winners, win)
         break
@@ -106,16 +63,30 @@ for (i in 1:length(bingo_numbers)) {
 
     }
     
-    
   }
   if (length(winners$num) == length(prepped_boards)) break
 }
 
-# calculate score
+# Part 1
+
+# which board wins first
+
+winning_board <- head(winners,1)
+
+unmarked_nums_win <- unlist(prepped_boards[[winning_board$board]]) 
+unmarked_nums_win <- unmarked_nums_win[!unmarked_nums_win %in% drawn_numbers[1:winning_board$draw]]
+
+as.numeric(winning_board$num) * sum(unmarked_nums_win)
+
+# Part 2
+
+# let the squid win
+# find the LAST board to win
 
 losing_board <- tail(winners,1)
 
-unmarked_nums <- unlist(prepped_boards[[losing_board$board]]) 
-unmarked_nums <- unmarked_nums[!unmarked_nums %in% drawn_numbers]
+unmarked_nums_lose <- unlist(prepped_boards[[losing_board$board]]) 
+unmarked_nums_lose <- unmarked_nums_lose[!unmarked_nums_lose %in% drawn_numbers]
 
-as.numeric(losing_board$num) * sum(unmarked_nums)
+as.numeric(losing_board$num) * sum(unmarked_nums_lose)
+
