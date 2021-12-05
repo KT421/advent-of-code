@@ -79,8 +79,8 @@ as.numeric(tail(drawn_numbers,1)) * sum(unmarked_nums)
 
 drawn_numbers <- NULL
 winning_board <- NULL
-winners <- data.frame(matrix(ncol=2,nrow=0))
-colnames(winners) <- c("num","board")
+winners <- data.frame(matrix(ncol=3,nrow=0))
+colnames(winners) <- c("draw", "num","board")
 
 for (i in 1:length(bingo_numbers)) {
   drawn_numbers <- bingo_numbers[1:i]
@@ -97,8 +97,8 @@ for (i in 1:length(bingo_numbers)) {
       if (all(board[,k] %in% drawn_numbers) | all(board[k,] %in% drawn_numbers))
       { winner = T }
       
-      if (winner == T & !j %in% winners[,2]) {
-        win <- c(num = as.numeric(bingo_numbers[i]), board = j)
+      if (winner == T & !j %in% winners[,3]) {
+        win <- c(draw = i, num = as.numeric(bingo_numbers[i]), board = j)
         winners <- bind_rows(winners, win)
         break
         
