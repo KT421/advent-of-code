@@ -19,19 +19,9 @@ fuel <- sum(abs(input - ideal_pos))
 # fuel cost increases with step
 # new ideal position is mean? 
 
+fuel_cost <- function (steps) { steps*(steps+1)/2 }
 
-ideal_pos <- as.integer(mean(input)) 
-
-movement <- abs(input - ideal_pos)
-
-fuel_cost <- function (steps) {
-  fuel <- 0
-  while (steps > 0) {
-  fuel <- fuel + steps
-  steps = steps - 1
-  }
-  fuel
-}
+movement <- abs(input - as.integer(mean(input)))
 
 fuel_usage <- map(movement, fuel_cost) %>% unlist() %>% sum()
 
