@@ -131,4 +131,4 @@ score_line <- function(line) {
 lines_index$score <- sapply(lines_index$closing, score_line)
 
 
-score_line(lines_index$closing[1])
+median(lines_index$score)
