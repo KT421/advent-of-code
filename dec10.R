@@ -62,7 +62,7 @@ if (nchar(line_encoded) == 0) {
   invalid_characters <- append(invalid_characters,invalid_char)
 }
 
-line_result <- c(URLdecode(line_encoded),status)
+line_result <- c(line_encoded,status)
 
 lines_index <- rbind(lines_index, line_result)
 
@@ -81,3 +81,54 @@ sum(as.numeric(invalid_characters))
 
 # part 2
 
+#filter out corrupted, finish incomplete lines
+
+colnames(lines_index) <- c("line","status")
+
+lines_index <- lines_index %>%
+  filter(status != "corrupted")
+
+
+
+# replace each value with its match
+
+open_to_close <- function(line) {
+  line <- str_replace_all(line, "%5B","%5D")
+  line <- str_replace_all(line, "%28","%29")
+  line <- str_replace_all(line, "%7B","%7D")
+  line <- str_replace_all(line, "%3C","%3E")
+}
+
+lines_index$closing <- open_to_close(lines_index$line)
+
+
+# reverse the order
+lines_index$closing <- sapply(lines_index$closing,URLdecode)
+lines_index$closing <- stringi::stri_reverse(lines_index$closing)
+
+# scoring
+
+score_line <- function(line) {
+  score <- 0
+
+  line <- str_split(line, "") %>% unlist()
+  
+  line[line == ")"] <- 1
+  line[line == "]"] <- 2
+  line[line == "}"] <- 3
+  line[line == ">"] <- 4
+  
+  line <- as.numeric(line)
+  
+  while (TRUE) {
+    score <- (score * 5) + line[1]
+    line <- line[-1]
+    if (length(line) == 0) break
+  }
+  score
+}
+
+lines_index$score <- sapply(lines_index$closing, score_line)
+
+
+score_line(lines_index$closing[1])
