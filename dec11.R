@@ -51,18 +51,11 @@ while (TRUE) {
       octopi[adjacent_octopi] <- octopi[adjacent_octopi] + 1
       
       # set octopi > 9 to "to flash" without popping any "flashed" to flash twice
-      
       for (adjacent in adjacent_octopi) {
-        if (flashes[adjacent] != "flashed") {
-          if (octopi[adjacent] > 9) {
-            flashes[adjacent] <- "to flash"
-          }
-        }
+        if (flashes[adjacent] != "flashed" && octopi[adjacent] > 9) { flashes[adjacent] <- "to flash" }
       }
-      
       flashes[octopus] <- "flashed"
     }
-    
     if (sum(flashes == "to flash") == 0) break
   }
   
