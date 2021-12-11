@@ -91,17 +91,17 @@ count_danger_spots(vent_locations_diag)
 
 #### shits and giggles ####
 
-library(viridis)
-library(ggthemes)
+#library(viridis)
+#library(ggthemes)
 
-vent_locations_diag %>%
-  group_by(x,y) %>%
-  summarise(count = n()) %>%
-ggplot(aes(x,y, color = fct_rev(as.factor(count)))) +
-  geom_point(size = .1, shape = 17) +
-  theme_solarized_2(light = FALSE) +
-  scale_color_viridis_d(option = "inferno") +
-  theme(legend.position = "none")
+#vent_locations_diag %>%
+#  group_by(x,y) %>%
+#  summarise(count = n()) %>%
+#ggplot(aes(x,y, color = fct_rev(as.factor(count)))) +
+#  geom_point(size = .1, shape = 17) +
+#  theme_solarized_2(light = FALSE) +
+#  scale_color_viridis_d(option = "inferno") +
+#  theme(legend.position = "none")
 
 
-ggsave("vents.png", width = 10, height = 10)
+#ggsave("vents.png", width = 10, height = 10)

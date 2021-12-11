@@ -63,7 +63,7 @@ while (TRUE) {
   
   step_counter <- step_counter + 1
   flash_counter <- append(flash_counter,sum(flashes == "flashed"))
-  if (step_counter == 100) print((sum(flash_counter)))
+  if (step_counter == 100) print(sum(flash_counter))
   if (sum(flashes == "flashed") == 100) {
     print(step_counter)
     break
