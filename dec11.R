@@ -51,7 +51,7 @@ for (steps in 1:100) {
       
       adjacent_octopi <- neighbors_in_bounds(octopus)
       
-      octopi[adjacent_octopi] <- octopi[adjacent_octopi] + 1
+      octopi[adjacent_octopi] <- increment_octopi(octopi[adjacent_octopi])
       
       # set octopi > 9 to "to flash" without popping any "flashed" to flash twice
       
@@ -96,7 +96,7 @@ while (TRUE) {
       
       adjacent_octopi <- neighbors_in_bounds(octopus)
       
-      octopi[adjacent_octopi] <- octopi[adjacent_octopi] + 1
+      octopi[adjacent_octopi] <- increment_octopi(octopi[adjacent_octopi])
       
       # set octopi > 9 to "to flash" without popping any "flashed" to flash twice
       
@@ -117,6 +117,9 @@ while (TRUE) {
   octopi[octopi > 9] <- 0
   
   step_counter <- step_counter + 1
-  print(step_counter)
-  if (sum(flashes == "flashed") == 100) break
+  
+  if (sum(flashes == "flashed") == 100) {
+    print(step_counter)
+    break
+    }
 }
