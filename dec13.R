@@ -70,15 +70,39 @@ fold_grid <- function(instruction) {
   if (direction == "x") {
     grid_a <- grid[,1:(value-1)]
     grid_b <- grid[,c(ncol(grid):(value+1)),drop = FALSE]
-    
+    new_grid <- grid_a
+    new_grid[,((ncol(new_grid) - ncol(grid_b))+1):ncol(new_grid)] <-  new_grid[,((ncol(new_grid) - ncol(grid_b))+1):ncol(new_grid)] + grid_b
   }
   
   # horizontal fold
   if (direction == "y") {
-    
+    grid_a <- grid[1:(value-1),]
+    grid_b <- grid[c(nrow(grid):(value+1)),,drop = FALSE]
+    new_grid <- grid_a
+    new_grid[((nrow(new_grid) - nrow(grid_b))+1):nrow(new_grid),] <-  new_grid[((nrow(new_grid) - nrow(grid_b))+1):nrow(new_grid),] + grid_b
   }
+  new_grid
 }
+
 
 # part 1: number of dots after first fold
 
+one_fold <- fold_grid(folds[1,])
+
+dim(one_fold)
+
+sum(one_fold > 0)
+
 # part 2: number of dots after all folds
+
+for (i in 1:nrow(folds)) {
+  grid <- fold_grid(folds[i,])
+}
+
+bool_grid <- ifelse(grid > 0,T,F)
+
+# use integrated optical sensors and neural network to decode final output
+
+image(t(bool_grid[nrow(bool_grid):1,]))
+
+# EPZGKCHU
