@@ -78,4 +78,6 @@ pairlist_result <- pairlist %>%
 
 (max(pairlist_result$value) - min(pairlist_result$value)) %>% format(scientific = F)
 
-  
+# each element is double-counted except the beginning and ending letter. 
+# This means that the final step may be off-by-one, if the first or last letters are the min or max. 
+# I adjusted for that using my meat brain because I ran out of time to write nice code
