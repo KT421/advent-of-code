@@ -3,17 +3,11 @@
 
 library(tidyverse)
 
-#input_example <- "target area: x=20..30, y=-10..-5" %>%
-#  str_extract("\\w=\\w{+}")
-
-## do string extraction later
+# eh I'm just gonna extract data from the string by hand
 
 target_x <- c(88,125)
 target_y <- c(-157,-103)
 
-# test input
-target_x <- c(20, 30)
-target_y <- c(-10,-5)
 
 # pt 1
 # let's brute force it. What could possibly go wrong?
