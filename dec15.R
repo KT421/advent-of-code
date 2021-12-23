@@ -29,12 +29,6 @@ V(cave_network)$risk <- input
 edgelist <- get.edgelist(cave_network)
 E(cave_network)$weight <- V(cave_network)[edgelist[,2]]$risk
 
-#for (i in 1:10000) {
-#cave_network <- set_edge_attr(cave_network, name = "weight", index = E(cave_network)[to(V(cave_network)[i])], value = input[i])
-#}
-
-# find shortest path
-
 distances(cave_network, v = 1, to = 10000, mode = "out")
 
 
