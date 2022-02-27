@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec13.txt")
+input <- read_lines("2021/input/dec13.txt")
 
 input_grid <- input[1:1017]
 

@@ -6,7 +6,7 @@
 
 library(tidyverse)
 
-steps <- read_csv("input/dec2.txt", col_names = FALSE)
+steps <- read_csv("2021/input/dec2.txt", col_names = FALSE)
 
 steps <- separate(steps, X1, c("direction", "value"), sep = " ")
 

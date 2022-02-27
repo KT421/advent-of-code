@@ -6,7 +6,7 @@ library(tidyverse)
 # find first winning bingo board
 # test
 
-input <- read_lines("input/dec4.txt", n_max = 1)
+input <- read_lines("2021/input/dec4.txt", n_max = 1)
 
 bingo_numbers <- str_split(input[1], ",")[[1]]
 

@@ -4,7 +4,7 @@
 
 library(tidyverse)
 
-diagnostics <- read_lines("input/dec3.txt") 
+diagnostics <- read_lines("2021/input/dec3.txt") 
 
 diagnostics <- data.frame(str_split_fixed(diagnostics,"",12))
 

@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec12.txt") %>% strsplit("-")   
+input <- read_lines("2021/input/dec12.txt") %>% strsplit("-")   
 
 input <- read_lines("start-A
 start-b

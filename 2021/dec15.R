@@ -4,7 +4,7 @@
 library(tidyverse)
 library(igraph)
 
-input <- read_lines("input/dec15.txt") %>% strsplit("") %>% unlist() %>% as.numeric()
+input <- read_lines("2021/input/dec15.txt") %>% strsplit("") %>% unlist() %>% as.numeric()
 
 input_example <- read_lines("1163751742
 1381373672

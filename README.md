@@ -1,8 +1,8 @@
-# 2021-advent-of-code
-Advent of Code 2021 puzzles
+# advent-of-code
+Advent of Code puzzles
 
 🎄🎄🎄🎄🎄
 
-https://adventofcode.com/2021
+https://adventofcode.com
 
-Solving these puzzles until I lose interest
+Gradually working my way through AoC puzzles, entirely in R

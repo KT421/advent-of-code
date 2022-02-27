@@ -4,7 +4,7 @@
 
 # Count number of readings that are greater than the previous reading
 
-depths <- read_lines("input/dec1.txt")
+depths <- read_lines("2021/input/dec1.txt")
 
 depths <- as.integer(depths)
 

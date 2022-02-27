@@ -6,7 +6,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec11.txt") %>% str_split("") %>% unlist() %>% as.numeric() %>% matrix(nrow = 10, ncol = 10, byrow=T)
+input <- read_lines("2021/input/dec11.txt") %>% str_split("") %>% unlist() %>% as.numeric() %>% matrix(nrow = 10, ncol = 10, byrow=T)
 
 test_input <- read_lines("5483143223
 2745854711

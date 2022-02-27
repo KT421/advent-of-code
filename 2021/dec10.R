@@ -1,7 +1,7 @@
 # Advent of Code 2021
 # Dec 10
 
-input <- read_lines("input/dec10.txt") 
+input <- read_lines("2021/input/dec10.txt") 
 
 test_input <- read_lines("[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(

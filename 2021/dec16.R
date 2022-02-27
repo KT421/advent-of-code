@@ -5,7 +5,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec16.txt") %>% str_split("") %>% unlist()
+input <- read_lines("2021/input/dec16.txt") %>% str_split("") %>% unlist()
 
 input_example1 <- "D2FE28" %>% str_split("") %>% unlist()
 

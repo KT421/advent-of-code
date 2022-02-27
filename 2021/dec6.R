@@ -5,7 +5,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec6.txt") %>% 
+input <- read_lines("2021/input/dec6.txt") %>% 
   strsplit(",") %>% 
   unlist() %>%
   table() 

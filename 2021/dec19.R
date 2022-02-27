@@ -6,7 +6,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec19.txt") %>% str_split("\n")
+input <- read_lines("2021/input/dec19.txt") %>% str_split("\n")
 
 # format data into workable structure
 

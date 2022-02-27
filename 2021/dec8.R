@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec8.txt") %>% str_split(" \\| | ") %>% tibble() %>% unnest_wider(col = c(.))
+input <- read_lines("2021/input/dec8.txt") %>% str_split(" \\| | ") %>% tibble() %>% unnest_wider(col = c(.))
 
 test_input <- "acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab | cdfeb fcadb cdfeb cdbaf" %>% str_split(" \\| | ") %>% tibble() %>% unnest_wider(col = c(.))
 

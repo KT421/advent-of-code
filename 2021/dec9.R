@@ -9,7 +9,7 @@ input <- read_lines("2199943210
 8767896789
 9899965678") %>% str_split("") %>% unlist() %>% as.numeric() %>% matrix(ncol=10)
 
-input <- read_lines("input/dec9.txt") %>% str_split("") %>% unlist() %>% as.numeric() %>%  matrix(ncol=100, byrow = TRUE)
+input <- read_lines("2021/input/dec9.txt") %>% str_split("") %>% unlist() %>% as.numeric() %>%  matrix(ncol=100, byrow = TRUE)
 
 # part 1 - sum all risk levels: local minima (adjacent only - no diags) + 1
 

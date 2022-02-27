@@ -3,7 +3,7 @@
 
 input <- str_split("16,1,2,0,4,2,7,1,2,14", ",") %>% unlist() %>% as.numeric()
 
-input <- str_split(read_lines("input/dec7.txt"),",") %>% unlist() %>% as.numeric()
+input <- str_split(read_lines("2021/input/dec7.txt"),",") %>% unlist() %>% as.numeric()
 
 # find horizontal position match that uses least number of steps ( wanna bet that part 2 adds vertical?)
 

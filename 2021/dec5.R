@@ -6,7 +6,7 @@
 
 library(tidyverse)
 
-input <- read_lines("input/dec5.txt")
+input <- read_lines("2021/input/dec5.txt")
 
 endpoints <- t(data.frame(strsplit(input, " -> ")))
 

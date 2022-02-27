@@ -3,8 +3,8 @@
 
 library(tidyverse)
 
-starting_polymer <- read_lines("input/dec14.txt",n_max = 1)
-polymer_chains <- read_lines("input/dec14.txt", skip = 2)
+starting_polymer <- read_lines("2021/input/dec14.txt",n_max = 1)
+polymer_chains <- read_lines("2021/input/dec14.txt", skip = 2)
 
 starting_polymer_example <- ("NNCB")
 polymer_chains_example <- read_lines("CH -> B
