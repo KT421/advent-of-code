@@ -25,9 +25,24 @@ format_instructions <- function(instruction) {
 instructions <- map_dfr(instructions,format_instructions) %>%
   mutate(across(.cols = c(x1,x2,y1,y2),as.numeric))
 
-format_instructions(instructions[[1]])
+lights <- matrix(data = 0, nrow = 1000, ncol = 1000)
 
-# can I do it keeping it all in the list?
+for (i in 1:nrow(instructions)) {
+  i <- instructions[i,]
+  
+  if (i$action == "on") {
+    lights[i$x1:i$y1,i$x2:i$y2] <- T
+  } else if (i$action == "off") {
+    lights[i$x1:i$y1,i$x2:i$y2] <- F
+  } else if (i$action == "toggle") {
+    lights[i$x1:i$y1,i$x2:i$y2] <- !lights[i$x1:i$y1,i$x2:i$y2]
+  }
+}
+
+sum(lights)
+
+# pt 2
+# now with ints instead of bools
 
 lights <- matrix(data = 0, nrow = 1000, ncol = 1000)
 
@@ -35,12 +50,12 @@ for (i in 1:nrow(instructions)) {
   i <- instructions[i,]
   
   if (i$action == "on") {
-    lights[i$x1:i$x2,i$y1:i$y2] <- 1
+    lights[i$x1:i$y1,i$x2:i$y2] <- lights[i$x1:i$y1,i$x2:i$y2] +1
   } else if (i$action == "off") {
-    lights[i$x1:i$x2,i$y1:i$y2] <- 0
+    lights[i$x1:i$y1,i$x2:i$y2] <- pmax(lights[i$x1:i$y1,i$x2:i$y2] - 1,0)
+    
   } else if (i$action == "toggle") {
-    lights[i$x1:i$x2,i$y1:i$y2][lights[i$x1:i$x2,i$y1:i$y2] == 0] <- 1
-    lights[i$x1:i$x2,i$y1:i$y2][lights[i$x1:i$x2,i$y1:i$y2] == 1] <- 0
+    lights[i$x1:i$y1,i$x2:i$y2] <- lights[i$x1:i$y1,i$x2:i$y2] + 2
   }
 }
 
