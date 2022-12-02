@@ -3,7 +3,7 @@
 
 library(tidyverse)
 
-input <- read_file("2022/input/day01.txt") %>% str_split("\\n\\n") %>% unlist()
+input <- read_file("2022/input/dec01.txt") %>% str_split("\\n\\n") %>% unlist()
 
 # PT1
 
