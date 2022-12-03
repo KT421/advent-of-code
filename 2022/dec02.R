@@ -54,7 +54,6 @@ rps2 <- input %>%
     b == "Z" ~ "win"
   ))
 
-# determine winning move
 rps2 %>%
   left_join(result_lookup, by = c("p1", "winner")) %>%
   pull(score) %>%
