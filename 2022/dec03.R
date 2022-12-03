@@ -1,30 +1,30 @@
 # AOC 2022 
 # Day 03
+# v2 - cleaned up
 
 library(tidyverse)
 
 input <- readLines("2022/input/dec03.txt") 
 
 rucksacks <- data.frame(a = substr(input, 1, nchar(input)/2),
-                        b = substr(input, nchar(input)/2+1, nchar(input)))
+                        b = substr(input, nchar(input)/2+1, nchar(input))) %>%
+  mutate(a = strsplit(a,""),
+         b = strsplit(b,""))
 
+priorities <- data.frame(items = c(letters,LETTERS),
+                         priority = 1:52)
   
 # PT 1
 
 # find doubled items
 
-doubles <- data.frame(item = NULL)
-for (i in 1:nrow(rucksacks)) {
-  doubled <- unlist(strsplit(rucksacks$a[i],""))[(unlist(strsplit(rucksacks$a[i],"")) %in% unlist(strsplit(rucksacks$b[i],"")))]
-  doubles <- rbind(doubles,doubled)
+find_doubles <- function(a,b) {
+    intersect(unlist(a),unlist(b))
 }
 
-
-priorities <- data.frame(items = c(letters,LETTERS),
-                     priority = 1:52)
-
-doubles %>% 
-  left_join(priorities, by = c(`X.s.` = "items")) %>%
+rucksacks %>% 
+  mutate(items = mapply(find_doubles, a, b)) %>%
+  left_join(priorities, by = c("items")) %>%
   pull(priority) %>%
   sum()
 
@@ -40,9 +40,7 @@ badges <- data.frame()
 for (i in 1:100) {
   group_bags <- rucksacks$rucksack[rucksacks$elf_group == i]
   
-  set1 <- group_bags[[1]][group_bags[[1]] %in% group_bags[[2]]]
-  set2 <- group_bags[[2]][group_bags[[2]] %in% group_bags[[3]]]
-  badge <- set1[set1 %in% set2]
+  badge <- intersect(group_bags[[1]], intersect(group_bags[[2]], group_bags[[3]]))
   
   badges <- rbind(badges, badge)
   
