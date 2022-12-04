@@ -9,8 +9,8 @@ input <- readLines("2022/input/dec04.txt") %>%
   strsplit(",") 
 
 find_overlap <- function(elf_assignments) {
-  elf1 <- eval(parse(text = elf_assignments[[1]][1]))
-  elf2 <- eval(parse(text = elf_assignments[[1]][2]))
+  elf1 <- eval(parse(text = elf_assignments[1]))
+  elf2 <- eval(parse(text = elf_assignments[2]))
   
   subset <- ifelse(identical(intersect(elf1, elf2), elf1) || identical(intersect(elf1, elf2), elf2),T,F) 
   overlap <- ifelse(is_empty(intersect(elf1,elf2)),F,T)
@@ -18,16 +18,12 @@ find_overlap <- function(elf_assignments) {
   return(c(subset,overlap))
 }
 
-results <- NULL
-
-for (i in 1:1000) {
-  results <- rbind(results,find_overlap(input[i]))
-}
+results <- sapply(input,find_overlap)
 
 # PT1
 
-sum(results[,1])
+sum(results[1,])
 
 # PT2
 
-sum(results[,2])
+sum(results[2,])
