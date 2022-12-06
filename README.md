@@ -11,7 +11,7 @@ There are 50 ⭐ possible per year
 
 ## 2022
 
-8 ⭐
+10 ⭐
 
 ## 2021
 
