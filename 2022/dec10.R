@@ -45,13 +45,6 @@ tracker %>%
 crt <- tracker %>%
   rename(sprite_center = X) %>%
   mutate(cycle = cycle - 1,
-    Y_pos = case_when(
-    cycle >= 201 ~ 6,
-    cycle >= 161 ~ 5,
-    cycle >= 121 ~ 4,
-    cycle >=81 ~ 3,
-    cycle > 40 ~ 2,
-    TRUE ~ 1),
   X_pos = case_when(
     cycle >= 201 ~ cycle - 200,
     cycle >= 161 ~ cycle - 160,
