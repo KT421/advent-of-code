@@ -4,3 +4,4 @@
 .Ruserdata
 2021-advent_of_code.Rproj
 .DS_store
+**/input

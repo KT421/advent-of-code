@@ -1,6 +1,8 @@
 # AOC 2022
 # Day 06
 
+library(tidyverse)
+
 input <- readLines("2022/input/dec06.txt") %>% strsplit("") %>% unlist()
 
 # PT1
