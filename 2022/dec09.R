@@ -24,7 +24,7 @@ tail_needs_to_move <- function(head_pos, tail_pos) {
   ifelse(abs(head_pos[1]-tail_pos[1]) > 1 || abs(head_pos[2]-tail_pos[2]) > 1, T, F) 
 }
 
-
+# PT 1
 head_pos <- c(0,0)
 tail_pos <- c(0,0)
 hist <- data_frame(head_pos[1], head_pos[2], tail_pos[1], tail_pos[2])
@@ -69,14 +69,13 @@ for (i in 1:2000) {
     }
     }
       
-    hist <- rbind(hist, data_frame(head_pos[1], head_pos[2], tail_pos[1], tail_pos[2])) %>%
-      distinct()
+    hist <- rbind(hist, data_frame(head_pos[1], head_pos[2], tail_pos[1], tail_pos[2])) 
   }
 
 
 }
 
-# PT 1
+
 # How many positions visited once
 all_tail_pos <- hist[,3:4] %>%
   distinct() %>%
