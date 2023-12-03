@@ -3,22 +3,21 @@
 
 library(tidyverse)
 
-input <- read_lines("2023/input/dec02.txt")  %>% str_split(":|;") 
+input <- read_lines("2023/input/dec02.txt") %>%
+  str_split(":|;")
 
 # make it a rectangular dataframe
-input <- input %>%
+input <- input  %>%
   lapply(`length<-`, max(lengths(input))) %>%
   data.frame() %>%
-  t() %>%
-  data.frame() 
+  data.table::transpose()
 
-colnames(input) <- c("game","round_1", "round_2", "round_3", "round_4", "round_5", "round_6") 
+colnames(input) <- c("game",paste0("round_",1:6)) 
 
 games <- input %>%
+  mutate(game = row_number()) %>%
   pivot_longer(round_1:round_6) %>%
-  na.omit() %>%
   separate_longer_delim(cols = everything(), delim = ",") %>%
-  mutate(game = str_extract(game, '[:digit:]{1,3}')) %>%
   separate_wider_delim(cols = value, delim = " ", names = c("x", "value", "color"))
 
 # PT1
@@ -43,9 +42,7 @@ games %>% filter(valid == "valid") %>%
 
 games_mins <- games %>%
   group_by(game, color) %>%
-  mutate(min = max(value)) %>%
-  select(game, color, min) %>%
-  distinct() %>%
+  summarise(min = max(value)) %>%
   pivot_wider(names_from = color, values_from = min) %>%
   mutate(power = red * green * blue)
 
