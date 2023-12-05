@@ -1,5 +1,5 @@
 # Advent of Code 2023
-# December 1
+# December 2
 
 library(tidyverse)
 
