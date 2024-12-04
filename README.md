@@ -9,6 +9,10 @@ Gradually working my way through AoC puzzles, entirely in R
 
 There are 50 ⭐ possible per year
 
+## 2024
+
+08 ⭐
+
 ## 2023
 
 06 ⭐
