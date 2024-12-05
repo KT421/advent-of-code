@@ -11,7 +11,7 @@ There are 50 ⭐ possible per year
 
 ## 2024
 
-08 ⭐
+10 ⭐
 
 ## 2023
 

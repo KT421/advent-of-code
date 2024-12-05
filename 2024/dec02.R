@@ -12,7 +12,7 @@ input <- read_lines("2024/input/dec02.txt") %>%
 is_safe <- function(report) {
   r <- as.numeric(report)
   lags <- na.omit(r - lead(r))
-  ifelse((all(lags > 0 ) & all(lags < 4)) | (all(lags < 0 ) & all(lags > -4)), TRUE, FALSE)
+  ((all(lags > 0 ) & all(lags < 4)) | (all(lags < 0 ) & all(lags > -4)))
 }
 
 sapply(input, is_safe) %>% sum
@@ -23,11 +23,11 @@ sapply(input, is_safe) %>% sum
 
 is_safe2 <- function(report) {
   if(is_safe(report)) { 
-    return(TRUE) 
+    T
     } else {
       dampener <- NULL
       for (i in 1:length(report)) dampener <- append(dampener,is_safe(report[-i]))
-      return(any(dampener))
+      any(dampener)
   }
 }
 
