@@ -3,9 +3,6 @@
 
 library(tidyverse)
 
-input <- "MMMSXXMASMMSAMXMSMSAAMXSXMAAMMMSAMASMSMXXMASAMXAMMXXAMMXXAMASMSMSASXSSSAXAMASAAAMAMMMXMMMMMXMXAXMASX" %>% 
-  str_split("") %>% unlist() %>% matrix(nrow = 10) 
-
 input <- read_lines("2024/input/dec04.txt") %>%
   str_split("") %>% unlist() %>% matrix(nrow = 140) %>% t()
 
@@ -14,10 +11,8 @@ input <- read_lines("2024/input/dec04.txt") %>%
 horizontals <- apply(input, 1, paste0, collapse = "")
 verticals <- apply(input, 2, paste0, collapse = "")
 
-d1 <- split(input, row(input) - col(input))
-d1 <- sapply(d1, paste0, collapse="")
-d2 <- split(input, row(input) + col(input))
-d2 <- sapply(d2, paste0, collapse="")
+d1 <- split(input, row(input) - col(input)) %>% sapply(paste0, collapse="")
+d2 <- split(input, row(input) + col(input)) %>% sapply(paste0, collapse="")
 
 all_rows <- c(horizontals, verticals, d1, d2)
 all_rows <- append(all_rows, stringi::stri_reverse(all_rows))
@@ -39,14 +34,14 @@ valid_xmas <- function(anchor) {
               input[anchor-nrow(input)+1], 
               input[anchor+nrow(input)-1], 
               input[anchor+nrow(input)+1])
-  
+  # validate
   all(sum(str_count(values, "M")) == 2, # 2 Ms
       sum(str_count(values, "S")) == 2, # 2 Ss
       values[2] != values[3], # Makes MAS not SAS or MAM
-      anchor > nrow(input), # not at edges of matrix
-      anchor < length(input)-nrow(input), 
-      anchor %% nrow(input) !=0, 
-      (anchor-1) %% nrow(input) != 0) 
+      anchor > nrow(input), # not at top of matrix
+      anchor < length(input)-nrow(input), # bottom 
+      anchor %% nrow(input) != 0,  # right
+      (anchor-1) %% nrow(input) != 0) # left
 }
 
 sapply(a, valid_xmas) %>% sum

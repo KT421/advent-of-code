@@ -13,12 +13,12 @@ instructions <- str_extract_all(input, regex_str) %>% unlist()
 
 mul <- function(a,b) {a*b}
 
-read <- function(x) eval(parse(text = x))
+read <- function(x) eval(parse(text = x)) # i hate it too
 
-result <- sapply(instructions,read)
-sum(result)
+sapply(instructions,read) %>% sum
 
-# Pt 2
+# Pt 2 
+# "do()" and "don't()" sprinkled throughout because of course that's how an elf would do it
 
 regex_str <- "mul\\(\\d{1,3},\\d{1,3}\\)|don't|do"
 instructions <- str_extract_all(input, regex_str) %>% unlist()
@@ -44,5 +44,5 @@ instructions_trimmed$dodont <- dodont
 instructions_trimmed <- instructions_trimmed %>%
   filter(dodont == "do")
 
-result2 <- sapply(instructions_trimmed$instruction,read)
-sum(result2)
+sapply(instructions_trimmed$instruction,read) %>% sum
+

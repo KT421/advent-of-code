@@ -27,5 +27,3 @@ similarity %>% count(value) %>%
   mutate(sim = value * n) %>%
   pull(sim) %>%
   sum()
-
-sum(similarity$sim)
